@@ -1,0 +1,15 @@
+services:
+  server:
+    build: ./server
+    ports: ["4000:4000"]
+    environment:
+      DATABASE_PATH: /data/syncboard.db
+      JWT_SECRET: change-this-in-production
+    volumes: ["syncboard-data:/data"]
+  client:
+    build: ./client
+    ports: ["8081:80"]
+    depends_on: [server]
+volumes:
+  syncboard-data:
+
